@@ -65,12 +65,12 @@ namespace Sample
 
         public void Log(string logMessage)
         {
-            Debugger.Log(1, "JS LOG",  logMessage + "\n");
+            Console.WriteLine(logMessage);
         }
 
         public void NotifyAuthenticationResult(string result, string token, string authenticatedUser, string userAgent)
         {
-            Debugger.Log(1, "Authentication Result ", "Authentication:"+ result + "\n");
+            Console.WriteLine("Authentication result in code:" + result);
             if (result.ToLower().Equals("passed"))
             {
                 @settings.Default["last_iproove_user"] = authenticatedUser;
