@@ -1,0 +1,11 @@
+Debug
+*.ipch
+packages
+*.suo
+bin
+obj
+*.user
+*.sdf
+*.opensdf
+ARM
+AppPackages
