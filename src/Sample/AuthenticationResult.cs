@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Sample
+﻿namespace Sample
 {
     public class AuthenticationResult
     {
@@ -20,11 +18,6 @@ namespace Sample
             IsSuccess = success;
             Token = "";
             iProoveUserId = "";
-        }
-
-        public string ToJsonString()
-        {
-            return JsonConvert.SerializeObject(this);
         }
     }
 }
