@@ -10,19 +10,19 @@
         console.log('Parent received message: ', event.data);
 
         if (event.origin !== domain) return;
-		
-		var iProovMessage = JSON.parse(event.data);
+        
+        var iProovMessage = JSON.parse(event.data);
 
         if (iProovMessage.action == 'getIdentity') {
             var iframe = document.getElementById('iproov_nobot').contentWindow;
-			
-			var response = {};
+            
+            var response = {};
             response.username = document.getElementById('login_id').value; // Username
-			response.version = '02';
-			
+            response.version = '02';
+            
             console.log('Identity: ', response.username);
 
-			iframe.postMessage(JSON.stringify(response), domain);
+            iframe.postMessage(JSON.stringify(response), domain);
         } else if (iProovMessage.action == 'focusIdentity') {
             document.getElementById('login_id').focus();
         } else if (iProovMessage.action == 'setResult') {
