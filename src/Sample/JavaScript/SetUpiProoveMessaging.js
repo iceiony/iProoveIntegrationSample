@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     // Create IE + others compatible event handler
     var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
     var eventer = window[eventMethod];
@@ -10,19 +10,24 @@
         console.log('Parent received message: ', event.data);
 
         if (event.origin !== domain) return;
+        
+        var iProovMessage = JSON.parse(event.data);
 
-        if (event.data == 'getIdentity') {
+        if (iProovMessage.action == 'getIdentity') {
             var iframe = document.getElementById('iproov_nobot').contentWindow;
-            var identity = '02' + document.getElementById('login_id').value; // Username
+            
+            var response = {};
+            response.username = document.getElementById('login_id').value; // Username
+            response.version = '02';
+            
+            console.log('Identity: ', response.username);
 
-            console.log('Identity: ', identity);
-
-            iframe.postMessage(identity, domain);
-        } else if (event.data == 'focusIdentity') {
+            iframe.postMessage(JSON.stringify(response), domain);
+        } else if (iProovMessage.action == 'focusIdentity') {
             document.getElementById('login_id').focus();
-        } else {
-            var token = event.data.substring(0, 64);
-            var result = event.data.substring(64);
+        } else if (iProovMessage.action == 'setResult') {
+            var token = iProovMessage.token;
+            var result = iProovMessage.result;
             var username = document.getElementById('login_id').value; // same as identity but withouth 02 at the front
             var userAgent = navigator.userAgent;
 
